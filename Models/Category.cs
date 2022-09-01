@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Device_Management_System.Interfaces;
 
 namespace Device_Management_System.Models
 {
-    public class Category
+    public class Category : TodayDate
     {
         [Key]
         public int CategoryID { get; set; }
@@ -17,8 +19,8 @@ namespace Device_Management_System.Models
         [Required]
         public string CategoryDescription { get; set; }
 
-        [Required]
-        public DateTime DateCreated { get; set; }
-
+    
     }
+
+    
 }

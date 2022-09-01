@@ -19,14 +19,17 @@ namespace Device_Management_System.Repository
         }
 
 
-        public void CreateZone(Zone zone)
+        public Zone CreateZone(Zone zone)
         {
-            throw new NotImplementedException();
+            _context.Zones.Add(zone);
+            _context.SaveChanges();
+            return zone;
         }
 
         public void DeleteZone(Zone zone)
         {
-            throw new NotImplementedException();
+            _context.Zones.Remove(zone);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Device> GetAllDevicesInZone(int zID)
@@ -44,9 +47,19 @@ namespace Device_Management_System.Repository
             return _context.Zones.FirstOrDefault(p => p.ZoneID == id);
         }
 
-        public void UpdateZone(Zone zone)
+        public Zone UpdateZone(Zone zone)
         {
-            throw new NotImplementedException();
+            //fetch employee first
+            var existingZone = _context.Zones.Find(zone.ZoneID);
+            if (existingZone != null)
+            {
+                //what are you updating
+                existingZone.ZoneName = zone.ZoneName;
+                existingZone.ZoneDescription = zone.ZoneDescription;
+                _context.Update(existingZone);
+                _context.SaveChanges();
+            }
+            return zone;
         }
 
         

@@ -1,0 +1,11 @@
+#Environment Variables
+.env
+
+#Build results
+appsettings.json
+appsettings.Development.json
+[Bb]in/
+[Oo]bj/
+
+#Visual Studio
+.vs/

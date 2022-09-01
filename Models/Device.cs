@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Device_Management_System.Interfaces;
 
 namespace Device_Management_System.Models
 {
-    public class Device
+    public class Device : TodayDate
     {
         [Key]
         public int DeviceId { get; set; }
@@ -19,8 +20,7 @@ namespace Device_Management_System.Models
         [Required]
         public bool IsActive { get; set; }
 
-        [Required]
-        public DateTime DateCreated { get; set; }
+        
 
         //Relationships
 

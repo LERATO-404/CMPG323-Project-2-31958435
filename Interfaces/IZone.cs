@@ -13,9 +13,9 @@ namespace Device_Management_System.Interfaces
         //List<Zone> GetAllZones();
         Zone GetZoneById(int id);
 
-        void CreateZone(Zone zone);
+        Zone CreateZone(Zone zone);
 
-        void UpdateZone(Zone zone);
+        Zone UpdateZone(Zone zone);
 
         void DeleteZone(Zone zone);
 

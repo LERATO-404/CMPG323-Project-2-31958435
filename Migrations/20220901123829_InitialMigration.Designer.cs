@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Device_Management_System.Migrations
 {
     [DbContext(typeof(DmsDbContext))]
-    [Migration("20220901073445_InitialMigration")]
+    [Migration("20220901123829_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,7 @@ namespace Device_Management_System.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.HasKey("CategoryID");
@@ -55,6 +56,7 @@ namespace Device_Management_System.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeviveName")
@@ -86,6 +88,7 @@ namespace Device_Management_System.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
+                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ZoneDescription")
