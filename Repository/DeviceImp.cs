@@ -4,39 +4,58 @@ using System.Linq;
 using System.Threading.Tasks;
 using Device_Management_System.Interfaces;
 using Device_Management_System.Models;
+using Device_Management_System.DatabaseContext;
 
 namespace Device_Management_System.Repository
 {
     public class DeviceImp : IDevice
     {
-        //Before editing/deleting
-        private bool CheckIfDeviceExist(int id)
+        public readonly DmsDbContext _context;
+
+        public DeviceImp(DmsDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
-        public void CreateDevice(Device device)
+
+        public Device CreateDevice(Device device)
         {
-            throw new NotImplementedException();
+            _context.Devices.Add(device);
+            _context.SaveChanges();
+            return device;
         }
 
         public void DeleteDevice(Device device)
         {
-            throw new NotImplementedException();
+            _context.Devices.Remove(device);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Device> GetAllDevices()
         {
-            throw new NotImplementedException();
+            return _context.Devices.ToList();
         }
 
-        public Zone GetDeviceById(int id)
+        public Device GetDeviceById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Devices.FirstOrDefault(p => p.DeviceId == id);
         }
 
-        public void UpdateDevice(Device device)
+        public Device UpdateDevice(Device device)
         {
-            throw new NotImplementedException();
+            //fetch employee first
+            var existingDevice = _context.Devices.Find(device.DeviceId);
+            if (existingDevice != null)
+            {
+                //what are you updating
+                existingDevice.DeviveName = device.DeviveName;
+                existingDevice.Status = device.Status;
+                existingDevice.IsActive = device.IsActive;
+                existingDevice.CategoryID = device.CategoryID;
+                existingDevice.ZoneID = device.ZoneID;
+                _context.Update(existingDevice);
+                _context.SaveChanges();
+            }
+            return device;
         }
     }
 }

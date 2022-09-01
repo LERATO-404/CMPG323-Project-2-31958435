@@ -12,11 +12,11 @@ namespace Device_Management_System.Interfaces
         //Or
         //List<Zone> GetAllZones();
 
-        Zone GetDeviceById(int id);
+        Device GetDeviceById(int id);
 
-        void CreateDevice(Device device);
+        Device CreateDevice(Device device);
 
-        void UpdateDevice(Device device);
+        Device UpdateDevice(Device device);
 
         void DeleteDevice(Device device);
     }

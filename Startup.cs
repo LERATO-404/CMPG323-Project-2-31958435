@@ -37,6 +37,7 @@ namespace Device_Management_System
 
             services.AddScoped<IZone, ZoneImp>();
             services.AddScoped<ICategory, CategoryImp>();
+            services.AddScoped<IDevice, DeviceImp>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
