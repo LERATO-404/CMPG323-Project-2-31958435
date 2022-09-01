@@ -6,7 +6,7 @@ using Device_Management_System.Models;
 
 namespace Device_Management_System.Interfaces
 {
-    interface ICategory
+    public interface ICategory
     {
 
         IEnumerable<Category> GetAllCategories();
@@ -15,9 +15,9 @@ namespace Device_Management_System.Interfaces
 
         Category GetCategoryById(int id);
 
-        void CreateCategory(Category category);
+        Category CreateCategory(Category category);
 
-        void UpdateCategory(Category category);
+        Category UpdateCategory(Category category);
 
         void DeleteCategory(Category category);
 

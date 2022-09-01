@@ -4,29 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using Device_Management_System.Interfaces;
 using Device_Management_System.Models;
+using Device_Management_System.DatabaseContext;
 
 namespace Device_Management_System.Repository
 {
     public class CategoryImp : ICategory
     {
-        //Before editing/deleting
-        private bool CheckIfCategoryExist(int catID)
+
+        public readonly DmsDbContext _context;
+
+        public CategoryImp(DmsDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
-        public void CreateCategory(Category category)
+
+        public Category CreateCategory(Category category)
         {
-            throw new NotImplementedException();
+            _context.Categories.Add(category);
+            _context.SaveChanges();
+            return category;
         }
 
         public void DeleteCategory(Category category)
         {
-            throw new NotImplementedException();
+            _context.Categories.Remove(category);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Category> GetAllCategories()
         {
-            throw new NotImplementedException();
+            return _context.Categories.ToList();
         }
 
         public IEnumerable<Device> GetAllDeviceInCategory(int id)
@@ -36,7 +43,7 @@ namespace Device_Management_System.Repository
 
         public Category GetCategoryById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Categories.FirstOrDefault(p => p.CategoryID == id);
         }
 
         public IEnumerable<Zone> NumberOfZonesInCategory(int id)
@@ -44,9 +51,19 @@ namespace Device_Management_System.Repository
             throw new NotImplementedException();
         }
 
-        public void UpdateCategory(Category category)
+        public Category UpdateCategory(Category category)
         {
-            throw new NotImplementedException();
+            //fetch employee first
+            var existingCategory = _context.Categories.Find(category.CategoryID);
+            if (existingCategory != null)
+            {
+                //what are you updating
+                existingCategory.CategoryName = category.CategoryName;
+                existingCategory.CategoryDescription = category.CategoryDescription;
+                _context.Update(existingCategory);
+                _context.SaveChanges();
+            }
+            return category;
         }
     }
 }

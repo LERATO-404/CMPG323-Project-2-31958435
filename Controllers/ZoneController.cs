@@ -78,7 +78,7 @@ namespace Device_Management_System.Controllers
             if (CheckIfZoneExist(existingZone) == true)
             {
                 _zoneRepo.DeleteZone(existingZone);
-                return Ok("Employee Id: " + id.ToString() + " Deleted");
+                return Ok("Zone Id: " + id.ToString() + " Deleted");
             }
             else
             {
