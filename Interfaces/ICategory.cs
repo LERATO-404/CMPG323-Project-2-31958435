@@ -22,7 +22,9 @@ namespace Device_Management_System.Interfaces
         void DeleteCategory(Category category);
 
         //return/get all the device in a specific category
-        IEnumerable<Device> GetAllDeviceInCategory(int id);
+        IEnumerable<Device> GetAllDeviceInCategory(int categoryId);
+        //IEnumerable<Device> GetAllDeviceInCategory(Category category);
+
 
         //not sure
         IEnumerable<Zone> NumberOfZonesInCategory(int id);

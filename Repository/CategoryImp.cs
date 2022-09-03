@@ -36,9 +36,17 @@ namespace Device_Management_System.Repository
             return _context.Categories.ToList();
         }
 
+    /*
         public IEnumerable<Device> GetAllDeviceInCategory(int id)
         {
             throw new NotImplementedException();
+        }*/
+
+        public IEnumerable<Device> GetAllDeviceInCategory(int categoryId)
+        {
+            //var existingCategory = _context.Categories.Find(categoryId);
+            var devices = _context.Devices.Where(d => d.CategoryID ==categoryId).ToList();
+            return devices;
         }
 
         public Category GetCategoryById(int id)

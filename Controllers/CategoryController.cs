@@ -86,5 +86,18 @@ namespace Device_Management_System.Controllers
                 return NotFound("Category Id: " + id.ToString() + " was not found");
             }
         }
+
+        [HttpGet("all/devices/{id}")]
+        public IActionResult GetAllDevicesInCategory(int id)
+        {
+            var existingCategory = _categoryRepo.GetCategoryById(id);
+            if (CheckIfCategoryExist(existingCategory) == true)
+            {
+                var devices = _categoryRepo.GetAllDeviceInCategory(id);
+                return Ok(devices);
+            }
+            return NotFound("Category Id: " + id.ToString() + " was not found");
+
+        }
     }
 }
