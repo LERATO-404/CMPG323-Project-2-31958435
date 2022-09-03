@@ -34,7 +34,8 @@ namespace Device_Management_System.Repository
 
         public IEnumerable<Device> GetAllDevicesInZone(int zID)
         {
-            throw new NotImplementedException();
+            var devices = _context.Devices.Where(d => d.ZoneID == zID).ToList();
+            return devices;
         }
 
         public IEnumerable<Zone> GetAllZones()

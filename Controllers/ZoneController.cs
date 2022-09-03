@@ -86,6 +86,18 @@ namespace Device_Management_System.Controllers
             }
         }
 
+        [HttpGet("all/devices/{id}")]
+        public IActionResult GetAllDevicesInZone(int id)
+        {
+            var existingZone = _zoneRepo.GetZoneById(id);
+            if (CheckIfZoneExist(existingZone) == true)
+            {
+                var devices = _zoneRepo.GetAllDevicesInZone(id);
+                return Ok(devices);
+            }
+            return NotFound("Zone Id: " + id.ToString() + " was not found");
+
+        }
 
 
 
