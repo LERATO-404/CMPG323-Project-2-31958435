@@ -7,7 +7,7 @@
 
 # Project Description
 
-## An Iot Device Management System keeps track of the whereabouts of all IoT devices deployed by the organisation
+# An Iot Device Management System keeps track of the whereabouts of all IoT devices deployed by the organisation
 where:
 1. Each IoT device is initially categoried and registered
 2. Then, IoT devices are deployed throughtout the organisation buildings in predefined zones
