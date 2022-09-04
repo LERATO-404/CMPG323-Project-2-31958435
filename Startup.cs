@@ -8,13 +8,18 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Device_Management_System.Authentication;
 using Device_Management_System.DatabaseContext;
 using Device_Management_System.Repository;
 using Device_Management_System.Interfaces;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Device_Management_System
 {
@@ -32,6 +37,39 @@ namespace Device_Management_System
         {
             services.AddDbContext<DmsDbContext>(opt => opt.UseSqlServer
                 (Environment.GetEnvironmentVariable("CONNECTIONSTRING")));
+
+            //Authentication DbContext
+            services.AddDbContext<ApplicationDbContext>(options => 
+            options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTIONSTRING")));
+
+            // For Identity 
+            services.AddIdentity<ApplicationUser, IdentityRole>() 
+            .AddEntityFrameworkStores<ApplicationDbContext>() 
+            .AddDefaultTokenProviders();
+
+             // Adding Authentication 
+            services.AddAuthentication(options => 
+            { 
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme; 
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; 
+            })
+
+            // Adding Jwt Bearer 
+            .AddJwtBearer(options => 
+            { 
+                options.SaveToken = true; 
+                options.RequireHttpsMetadata = false; 
+                options.TokenValidationParameters = new TokenValidationParameters() 
+                { 
+                    ValidateIssuer = true, 
+                    ValidateAudience = true, 
+                    ValidAudience = Configuration["JWT:ValidAudience"], 
+                    ValidIssuer = Configuration["JWT:ValidIssuer"], 
+                    IssuerSigningKey = new 
+                    SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SECRETE"])) 
+                }; 
+            }); 
 
             
 
@@ -60,6 +98,7 @@ namespace Device_Management_System
 
             app.UseRouting();
 
+            app.UseAuthentication(); 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
