@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Device_Management_System.Interfaces;
 using Device_Management_System.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Device_Management_System.Controllers
 {
+    //[Authorize(Roles = UserRoles.Admin)]
+    [Authorize]
     [Route("api/category")]
     [ApiController]
     public class CategoryController : ControllerBase
