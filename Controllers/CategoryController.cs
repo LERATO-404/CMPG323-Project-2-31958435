@@ -102,5 +102,18 @@ namespace Device_Management_System.Controllers
             return NotFound("Category Id: " + id.ToString() + " was not found");
 
         }
+
+
+        [HttpGet("zones/count/{id}")]
+        public ActionResult<int> ZonesCount(int id){
+            var existingCategory = _categoryRepo.GetCategoryById(id);
+            if (CheckIfCategoryExist(existingCategory) == true)
+            {
+                //int numberOfZones =_categoryRepo.NumberOfZonesInCategory(id);
+                //return numberOfZones;
+                return _categoryRepo.NumberOfZonesInCategory(id);
+            }
+            return NotFound("Category Id: " + id.ToString() + " was not found");
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace Device_Management_System.Repository
             return _context.Categories.FirstOrDefault(p => p.CategoryID == id);
         }
 
-        public IEnumerable<Zone> NumberOfZonesInCategory(int id)
+        public IEnumerable<Zone> NumberOfZonesInCategory1(int id)
         {
             throw new NotImplementedException();
         }
@@ -66,6 +66,48 @@ namespace Device_Management_System.Repository
                 _context.SaveChanges();
             }
             return category;
+        }
+
+        public int NumberOfZonesInCategory(int id)
+        {
+            int zoneCount = _context.Devices
+                            .Where(d => d.CategoryID == id)
+                            .GroupBy( x => x.ZoneID).Count();
+            return zoneCount;
+            //int zoneCount = _context.Devices.Where(x => x.CategoryID == id).GroupBy(x => x.CategoryID).Count();
+            //return zoneCount;
+            /*
+            int zoneCount = _context.Devices.Where(dd => dd.CategoryID == id)
+                            .Join(_context.Categories,
+                                dc => dc.CategoryID,
+                                c => c.CategoryID, 
+                                (dc,c) => new {dc,c})
+                            .Join(_context.Zones,
+                                dz => dz.dc.ZoneID,
+                                z => z.ZoneID,
+                                (dz,z) => new {dz, z})
+                            .GroupBy(
+                                x => x.z.ZoneID
+                            ).Count();*/
+            /*
+            var zonesFound = from d in _context.Devices
+                            join c in _context.Categories
+                            on d.CategoryID equals c.CategoryID
+                            join z in _context.Zones
+                            on d.ZoneID equals z.ZoneID
+                            select new {c.CategoryID, z.ZoneID};
+            foreach (var item in zonesFound){
+                int zoneCount = _context.Devices.Where(x => x.CategoryID == id).GroupBy(x => x.CategoryID).Count();
+                return zoneCount;
+            }
+            return 0;
+            var zonesFound = _context.Devices.Select (d => new  MyCategoryView
+                            {
+                                CategoryNumber = id,
+                                ZonesCount = _context.Zones.Count()
+                            }).ToList();*/
+            //return 0;
+            
         }
     }
 }

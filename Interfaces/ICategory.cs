@@ -27,6 +27,6 @@ namespace Device_Management_System.Interfaces
 
 
         //not sure
-        IEnumerable<Zone> NumberOfZonesInCategory(int id);
+        int NumberOfZonesInCategory(int id);
     }
 }
