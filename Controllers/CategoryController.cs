@@ -90,7 +90,7 @@ namespace Device_Management_System.Controllers
             }
         }
 
-        [HttpGet("all/devices/{id}")]
+        [HttpGet("{id}/devices")]
         public IActionResult GetAllDevicesInCategory(int id)
         {
             var existingCategory = _categoryRepo.GetCategoryById(id);
@@ -104,7 +104,7 @@ namespace Device_Management_System.Controllers
         }
 
 
-        [HttpGet("zones/count/{id}")]
+        [HttpGet("{id}/zones")]
         public ActionResult<int> ZonesCount(int id){
             var existingCategory = _categoryRepo.GetCategoryById(id);
             if (CheckIfCategoryExist(existingCategory) == true)

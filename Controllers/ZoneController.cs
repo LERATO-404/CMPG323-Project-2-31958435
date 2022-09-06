@@ -89,7 +89,7 @@ namespace Device_Management_System.Controllers
             }
         }
 
-        [HttpGet("all/devices/{id}")]
+        [HttpGet("{id}/devices")]
         public IActionResult GetAllDevicesInZone(int id)
         {
             var existingZone = _zoneRepo.GetZoneById(id);

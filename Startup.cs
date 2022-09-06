@@ -36,11 +36,11 @@ namespace Device_Management_System
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DmsDbContext>(opt => opt.UseSqlServer
-                (Environment.GetEnvironmentVariable("CONNECTIONSTRING")));
+                (Environment.GetEnvironmentVariable("Azure_sql_Connectionstring")));
 
             //Authentication DbContext
             services.AddDbContext<ApplicationDbContext>(options => 
-            options.UseSqlServer(Environment.GetEnvironmentVariable("CONNECTIONSTRING")));
+            options.UseSqlServer(Environment.GetEnvironmentVariable("Azure_sql_Connectionstring")));
 
             // For Identity 
             services.AddIdentity<ApplicationUser, IdentityRole>() 
@@ -106,11 +106,12 @@ namespace Device_Management_System
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Device_Management_System v1"));
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Device_Management_System v1"));
+                
             }
 
             app.UseHttpsRedirection();
