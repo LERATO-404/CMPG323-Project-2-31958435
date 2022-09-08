@@ -1,6 +1,0 @@
-# Publish Web Output
-PublishProfiles/
-*.[Pp]ublish.xml
-*.azurePubxml
-*.pubxml
-*.publishproj
