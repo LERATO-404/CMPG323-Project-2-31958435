@@ -45,6 +45,9 @@ that will enable them to use the API.
 ```url
 https://device-management-sys-dev.azurewebsites.net/api/authenticate
 ```
+*API-Manager Image*<br>
+<img src="Api-man-Images/Api-man-Auth.png" width=500>
+
 *Parameters*<br>
 ---
 Parameter | Required/Optional | Description | Type
@@ -167,7 +170,11 @@ Response body
 ```url
 https://device-management-sys-dev.azurewebsites.net/api/category
 ```
-**Parameters**
+
+*API-Manager Image*<br>
+<img src="Api-man-Images/Api-man-Category.png" width=500>
+
+*Parameters*<br>
 Parameter | Required/Optional | Description | Type
 ---| ---| ---| ---
 {Categoryid} | `Required` | **Refers to the id of the resource** | Integer 
@@ -520,6 +527,9 @@ Response body<br>
 ```url
 https://device-management-sys-dev.azurewebsites.net/api/Zones
 ```
+
+*API-Manager Image*<br>
+<img src="Api-man-Images/Api-man-zones.png" width=500>
 
 *Parameters*<br>
 ---
@@ -897,6 +907,9 @@ Zone Id: 6 was not found
 ```url
 https://device-management-sys-dev.azurewebsites.net/api/device
 ```
+
+*API-Manager Image*<br>
+<img src="Api-man-Images/Api-man-Device.png" width=500>
 
 *Parameters*<br>
 ---
